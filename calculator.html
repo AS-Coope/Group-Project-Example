@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGI Demo Website - Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="calculator.css">
+    <script src="calculator.js"></script>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
         <h1>Calculator</h1>
     </header>
 
-    <main>
+    <main id="calculator-body">
         <!--Calculator Goes here-->
         <!--Layout-->
         <!--
@@ -22,7 +23,19 @@
             Between the boxes will be the respective sign for whatever operation was chosen:
             If add was chosen then the plus (+) sign will be shown.
         -->
+        <div id="inputs">
+            <input>
+            <div class="symbol">+</div>
+            <input>
+            <span class="symbol">=</span>
+        </div>
 
+        <div id="buttons">
+            <button id="add">Add</button>
+            <button id="subtract">Subtract</button>
+            <button id="multiply">Multiply</button>
+            <button id="division">Division</button>
+        </div>
     </main>
 </body>
 
