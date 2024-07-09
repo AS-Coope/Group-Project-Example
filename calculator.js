@@ -2,7 +2,7 @@ let firstNum = document.getElementById("firstNum");
 let secondNum = document.getElementById("secondNum");
 let operation = document.getElementById("operation");
 let answer = document.getElementById("answer");
-let errorPara = document.getElementById("error");
+let error = document.getElementById("error");
 
 // BUTTONS
 let divisionBtn = document.getElementById("division");
@@ -10,7 +10,7 @@ let addBtn = document.getElementById("add");
 let multBtn = document.getElementById("multiply");
 let subtractBtn = document.getElementById("subtract");
 
-
+// OPERATION FUNCTIONS
 function add(addend1, addend2) {
     let total = addend1 + addend2;
     operation.textContent = "+"; // update operation sign
@@ -33,7 +33,7 @@ function divide(dividend, divisor) {
 
     // a check to ensure no dividing by zero
     if (divisor === 0) {
-        errorPara.textContent = "Sorry, cannot divide by zero (0)";
+        error.textContent = "Sorry, cannot divide by zero (0)";
     } else {
         let quotient = dividend / divisor;
         operation.textContent = "/"; // update operation sign
@@ -41,30 +41,35 @@ function divide(dividend, divisor) {
     }
 }
 
-// event listeners for each operation
-addBtn.addEventListener('click', () => {
-    errorPara.textContent = "";
+// since all the operations (the event listener's, specifically) have the same content,
+// this higher order function reduces duplication of code
+function arbitraryOperation(func) {
+    error.textContent = ""; // always clear the error message
+
     if (firstNum.value === "" || secondNum.value === "") {
-        errorPara.textContent = "Please enter a number.";
+        // checks that the textbox isn't empty when an operation is clicked
+        error.textContent = "Please enter a number.";
     } else if (isNaN(firstNum.value) || isNaN(secondNum.value)) {
-        // check if text or symbols or anything that is not a number is entered
-        errorPara.textContent = "A number was not entered.";
+        // checks if text or symbols or anything that is not a number is entered
+        error.textContent = "There is a value that is not a number.";
     } else {
-        add(Number(firstNum.value), Number(secondNum.value));
+        func(Number(firstNum.value), Number(secondNum.value));
     }
+}
+
+// EVENT LISTENERS
+addBtn.addEventListener('click', () => {
+    arbitraryOperation(add);
 });
 
 subtractBtn.addEventListener('click', () => {
-    errorPara.textContent = "";
-    subtract(Number(firstNum.value), Number(secondNum.value));
+    arbitraryOperation(subtract);
 });
 
 multBtn.addEventListener('click', () => {
-    errorPara.textContent = "";
-    multiply(Number(firstNum.value), Number(secondNum.value));
+    arbitraryOperation(multiply);
 });
 
 divisionBtn.addEventListener('click', () => {
-    errorPara.textContent = "";
-    divide(Number(firstNum.value), Number(secondNum.value));
+    arbitraryOperation(divide);
 });
