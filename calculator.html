@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGI Demo Website - Calculator</title>
     <link rel="stylesheet" href="calculator.css">
-    <script src="calculator.js"></script>
+    <script src="calculator.js" defer></script>
 </head>
 
 <body>
@@ -24,12 +24,14 @@
             If add was chosen then the plus (+) sign will be shown.
         -->
         <div id="inputs">
-            <input>
-            <div class="symbol">+</div>
-            <input>
+            <input type="text" id="firstNum">
+            <div class="symbol" id="operation">+</div>
+            <input type="text" id="secondNum">
             <span class="symbol">=</span>
+            <div id="answer"></div>
         </div>
 
+        <p id="error"></p>
         <div id="buttons">
             <button id="add">Add</button>
             <button id="subtract">Subtract</button>
