@@ -46,15 +46,20 @@ button:hover {
     align-items: center;
 }
 
+#inputs input,
+#answer {
+    margin: 2rem;
+}
+
 #inputs input {
     width: 5rem;
     height: 5rem;
-    margin: 2rem;
     font-size: 3rem;
     text-align: center;
 }
 
-.symbol {
+.symbol,
+#answer {
     display: flex;
     font-size: 3rem;
     align-items: center;
