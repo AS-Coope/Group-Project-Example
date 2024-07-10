@@ -1,14 +1,12 @@
-let firstNum = document.getElementById("firstNum");
-let secondNum = document.getElementById("secondNum");
-let operation = document.getElementById("operation");
-let answer = document.getElementById("answer");
 let error = document.getElementById("error");
 
-// BUTTONS
-let divisionBtn = document.getElementById("division");
-let addBtn = document.getElementById("add");
-let multBtn = document.getElementById("multiply");
-let subtractBtn = document.getElementById("subtract");
+let numkeys = document.getElementsByClassName("numkey");
+for (let i = 0; i < numkeys.length; i++) {
+    elem = numkeys[i];
+    elem.addEventListener('click', () => {
+        error.textContent += numkeys[i].textContent;
+    });
+}
 
 // OPERATION FUNCTIONS
 function add(addend1, addend2) {
@@ -73,3 +71,9 @@ multBtn.addEventListener('click', () => {
 divisionBtn.addEventListener('click', () => {
     arbitraryOperation(divide);
 });
+
+
+
+// enter number
+// press an operation but don't update the screen
+// whatever number is in the div, let that be the 
