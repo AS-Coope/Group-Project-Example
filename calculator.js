@@ -1,4 +1,5 @@
 let error = document.getElementById("error");
+let delKey = document.getElementById("delkey");
 
 let numkeys = document.getElementsByClassName("numkey");
 for (let i = 0; i < numkeys.length; i++) {
@@ -7,6 +8,14 @@ for (let i = 0; i < numkeys.length; i++) {
         error.textContent += numkeys[i].textContent;
     });
 }
+
+delKey.addEventListener('click', () => {
+    if (error.textContent.length > 0) {
+        error.textContent = error.textContent.slice(0, -1);
+    } else {
+        console.log("No text in the display");
+    }
+});
 
 // OPERATION FUNCTIONS
 function add(addend1, addend2) {
@@ -71,9 +80,3 @@ multBtn.addEventListener('click', () => {
 divisionBtn.addEventListener('click', () => {
     arbitraryOperation(divide);
 });
-
-
-
-// enter number
-// press an operation but don't update the screen
-// whatever number is in the div, let that be the 
