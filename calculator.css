@@ -75,3 +75,42 @@ button:hover {
     justify-content: center;
     align-items: center;
 }
+
+.numpad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#buttons {
+    display: none;
+}
+
+#error {
+    width: 20rem;
+    height: 3rem;
+    background: white;
+    border: black 0.15rem solid;
+    margin-bottom: 2rem;
+    color: black;
+    font-size: 2rem;
+    text-align: end;
+}
+
+.numpad button {
+    width: 5rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    border: grey;
+    background-color: white;
+}
+
+.display {
+    width: 20rem;
+    height: 3rem;
+    background: white;
+    border: black 0.15rem solid;
+    margin-bottom: 2rem;
+    color: black;
+    font-size: 1.5rem;
+}
