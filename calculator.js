@@ -1,7 +1,24 @@
 let error = document.getElementById("error");
-let delKey = document.getElementById("delkey");
 
+// KEYS
+// Num Keys
 let numkeys = document.getElementsByClassName("numkey");
+
+// Operation Keys
+let delKey = document.getElementById("delkey");
+let addKey = document.getElementById("addkey");
+let subKey = document.getElementById("subkey");
+let multKey = document.getElementById("multkey");
+let divKey = document.getElementById("divkey");
+let equalKey = document.getElementById("equalkey");
+
+let operation = "+";
+
+// Variables
+let firstNum;
+let secondNum;
+
+// Event listener for all keys so they are added to the display when clicked
 for (let i = 0; i < numkeys.length; i++) {
     elem = numkeys[i];
     elem.addEventListener('click', () => {
@@ -18,65 +35,80 @@ delKey.addEventListener('click', () => {
 });
 
 // OPERATION FUNCTIONS
-function add(addend1, addend2) {
+function add(/*addend1, addend2*/) {
+    operation = "+"
     let total = addend1 + addend2;
     operation.textContent = "+"; // update operation sign
     answer.textContent = total;
 }
 
-function subtract(minuend, subtrahend) {
+function subtract(/*minuend, subtrahend*/) {
+    operation = "-"
     let diff = minuend - subtrahend;
     operation.textContent = "-"; // update operation sign
     answer.textContent = diff;
 }
 
-function multiply(multiplicand, multiplier) {
+function multiply(/*multiplicand, multiplier*/) {
+    operation = "*"
     let product = multiplicand * multiplier;
     operation.textContent = "*"; // update operation sign
     answer.textContent = product;
 }
 
-function divide(dividend, divisor) {
+function divide(/*dividend, divisor*/) {
+    operation = "/";
 
     // a check to ensure no dividing by zero
-    if (divisor === 0) {
-        error.textContent = "Sorry, cannot divide by zero (0)";
-    } else {
-        let quotient = dividend / divisor;
-        operation.textContent = "/"; // update operation sign
-        answer.textContent = (Math.round(quotient * 100)) / 100; // rounding to 2 decimal places
-    }
+
+    error.textContent = (Math.round((firstNum / secondNum) * 100)) / 100; // rounding to 2 decimal places
+
 }
 
 // since all the operations (the event listener's, specifically) have the same content,
 // this higher order function reduces duplication of code
-function arbitraryOperation(func) {
-    error.textContent = ""; // always clear the error message
-
-    if (firstNum.value === "" || secondNum.value === "") {
-        // checks that the textbox isn't empty when an operation is clicked
-        error.textContent = "Please enter a number.";
-    } else if (isNaN(firstNum.value) || isNaN(secondNum.value)) {
-        // checks if text or symbols or anything that is not a number is entered
-        error.textContent = "There is a value that is not a number.";
+function arbitraryOperation() {
+    //error.textContent = ""; // always clear the error message
+    if (error.textContent === "") {
+        console.log("No numbers to add");
     } else {
-        func(Number(firstNum.value), Number(secondNum.value));
+        firstNum = Number(error.textContent);
+        console.log(`First Number: ${firstNum}`);
+        error.textContent = "";
     }
 }
-
 // EVENT LISTENERS
-addBtn.addEventListener('click', () => {
-    arbitraryOperation(add);
+
+equalKey.addEventListener('click', () => {
+    secondNum = Number(error.textContent);
+    console.log(`Second Number: ${secondNum}`);
+    if (operation === "+") {
+        error.textContent = firstNum + secondNum;
+    } else if (operation === "-") {
+        error.textContent = firstNum - secondNum;
+    } else if (operation === "*") {
+        error.textContent = firstNum * secondNum;
+    } else if (operation === "/") {
+        error.textContent = Math.round((firstNum / secondNum) * 100) / 100;
+    }
 });
 
-subtractBtn.addEventListener('click', () => {
+addKey.addEventListener('click', () => {
+    operation = "+";
+    arbitraryOperation();
+});
+
+subKey.addEventListener('click', () => {
+    operation = "-";
     arbitraryOperation(subtract);
 });
 
-multBtn.addEventListener('click', () => {
+multKey.addEventListener('click', () => {
+    operation = "*";
     arbitraryOperation(multiply);
 });
 
-divisionBtn.addEventListener('click', () => {
-    arbitraryOperation(divide);
+divKey.addEventListener('click', () => {
+    operation = "/";
+    arbitraryOperation();
 });
